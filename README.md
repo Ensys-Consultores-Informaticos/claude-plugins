@@ -125,6 +125,18 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.9.0** — la **identificación de riesgos** deja de identificar por número los dos riesgos
+que la NIA-ES 240 presume en todo encargo, y los busca por su nombre en el catálogo del
+máster. El número de un riesgo es la numeración interna de cada máster y cambia entre ellos:
+«Integridad de las ventas» es el 18 en un máster de la firma y el 97 en otro. Con el número
+fijo, un encargo que use otro máster metía en el informe dos riesgos que no eran, rotulados
+como de inclusión obligatoria, dejaba fuera los dos que sí lo son, y la validación no decía
+nada. Ahora el skill resuelve los dos por nombre, imprime con qué número salen en tu máster,
+para si no los encuentra, y avisa si el máster es de un ejercicio distinto del auditado.
+Además: el papel deja constancia de qué máster se usó, la consulta de los ejercicios va
+escrita en el procedimiento, y la referencia del papel de trabajo se busca en el expediente
+antes de preguntártela.
+
 **1.8.0** — las pruebas de ForSampling **leen las facturas con un agente lector**, por lotes y
 en paralelo. Las páginas escaneadas se miran igual, pero fuera del contexto principal: en una
 MUM de 42 elementos la lectura pasó de unos diez minutos a menos de dos. El lector recibe el
