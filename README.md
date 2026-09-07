@@ -125,6 +125,17 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.10.0** — el programa que lee el expediente **no puede escribir en él**. Las consultas al
+expediente y al diario contable eran de lectura por costumbre, no por diseño: aceptaban
+sentencias que modifican datos, y en el caso del diario lo único que impedía que el cambio
+se quedase era un fallo interno. Ahora se rechaza cualquier consulta que no sea de lectura,
+antes de abrir el fichero, y el aviso lo dice sin rodeos. También: el fichero de bloqueo de
+Access que el diario deja al consultarse ya no sobrevive a la consulta, así que dejan de
+acumularse `.ldb` sueltos en la carpeta del cliente. Y un diagnóstico nuevo para un fallo
+que cuesta media hora entender: cuando el conector de Gesia se queda huérfano —el estado
+dice ENCENDIDO pero no lee nada, y «Arrancar servidor API» no lo arregla—, el mensaje ahora
+dice que no es la consulta y que hay que cerrar `GesiaAPIConnectorTool.exe`.
+
 **1.9.0** — la **identificación de riesgos** deja de identificar por número los dos riesgos
 que la NIA-ES 240 presume en todo encargo, y los busca por su nombre en el catálogo del
 máster. El número de un riesgo es la numeración interna de cada máster y cambia entre ellos:
@@ -166,7 +177,7 @@ carpeta, renderizan solo la primera página de cada documento y cruzan con la mu
 comprueba la aritmética con retención de IRPF y con exenciones, y cuando un elemento se queda
 sin documento y sobra uno del mismo tercero, el papel lo señala como posible diferencia real.
 
-El programa que lee el expediente pasa a **1.9.3**: además de ForSampling, `configurar` deja
+El programa que lee el expediente pasa a **1.10.0**: además de ForSampling, `configurar` deja
 de afirmar cosas del expediente cuando no ha podido abrir el fichero.
 
 **1.6.4** — la **cancelación de saldos deja fuera las cuentas que ya cierran a cero**.
