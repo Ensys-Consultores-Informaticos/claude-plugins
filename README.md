@@ -125,6 +125,10 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.10.1** — sin cambios de funcionamiento: corrige la fecha de una anotación interna en el
+código del programa que lee el expediente. Se saca versión propia, en vez de reemplazar el
+binario de la 1.10.0, para que nunca circulen dos programas distintos con el mismo número.
+
 **1.10.0** — el programa que lee el expediente **no puede escribir en él**. Las consultas al
 expediente y al diario contable eran de lectura por costumbre, no por diseño: aceptaban
 sentencias que modifican datos, y en el caso del diario lo único que impedía que el cambio
@@ -177,7 +181,7 @@ carpeta, renderizan solo la primera página de cada documento y cruzan con la mu
 comprueba la aritmética con retención de IRPF y con exenciones, y cuando un elemento se queda
 sin documento y sobra uno del mismo tercero, el papel lo señala como posible diferencia real.
 
-El programa que lee el expediente pasa a **1.10.0**: además de ForSampling, `configurar` deja
+El programa que lee el expediente pasa a **1.10.1**: además de ForSampling, `configurar` deja
 de afirmar cosas del expediente cuando no ha podido abrir el fichero.
 
 **1.6.4** — la **cancelación de saldos deja fuera las cuentas que ya cierran a cero**.
