@@ -125,6 +125,36 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.11.0** — la **cancelación de saldos** empareja mucho mejor, y pregunta antes de
+empezar.
+
+Hasta ahora emparejaba por importes: cada factura con el pago de igual importe, y lo que
+quedaba, por acumulación o por combinaciones. Eso deja fuera un caso muy común: **una
+factura pagada en tres plazos desiguales**, donde ningún pago se parece a la factura ni a
+los otros. Ahora, cuando el diario del cliente trae el **número de documento**, los apuntes
+de una misma factura se agrupan por ahí — y el grupo se acepta **solo si suma cero**, así
+que un número mal puesto no puede formar un grupo falso.
+
+Con eso se resuelve también lo que más vale del procedimiento, **la apertura**: un pago
+cuya factura no está en el ejercicio es, por fuerza, un pago de lo que venía del año
+anterior. Medido en un expediente real, una cuenta de 189 apuntes pasó de 135 apuntes sin
+emparejar a **21, los mismos que había dejado el auditor a mano**; y en el grupo de
+proveedores y acreedores completo se cerraron 36 de 39 aperturas.
+
+Y antes de generar nada, el procedimiento hace una **pasada en seco**: mide qué columnas
+trae el diario y cuánto aporta cada una **en ese cliente**, y te traslada las preguntas que
+no puede contestar solo —si hay mayor del ejercicio anterior para las aperturas que quedan
+abiertas, con el número de cuenta; si se pueden barrer diferencias de céntimos, que es una
+decisión de materialidad y es tuya; y cómo paga o cobra el cliente—. El papel gana dos
+columnas, el **número de factura** y el **asiento**, para poder localizar cada apunte en
+Gesia.
+
+En la **prueba MUM** el papel se reorganiza en cuatro zonas de color —los datos de la
+muestra, lo leído en la factura, la prueba y la evidencia del cruce—, el error y su
+porcentaje pasan a ser **fórmulas** que se recalculan al cambiar el valor según auditoría,
+la celda del fichero es un **enlace que abre el documento**, y la observación se acorta a
+una línea. De cada factura se lee además el **concepto**.
+
 **1.10.1** — sin cambios de funcionamiento: corrige la fecha de una anotación interna en el
 código del programa que lee el expediente. Se saca versión propia, en vez de reemplazar el
 binario de la 1.10.0, para que nunca circulen dos programas distintos con el mismo número.
