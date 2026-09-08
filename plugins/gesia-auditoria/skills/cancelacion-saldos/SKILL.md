@@ -281,7 +281,8 @@ grupos de cuentas en la misma sesión: nada de `extracto_clientes.csv` ni
 variantes por ejecución. `exportar_consulta` sobrescribe avisando, así que
 el residuo queda en un fichero en vez de acumularse.
 
-### Paso 2b — En Cowork, subir el extracto (en local no aplica)
+<!-- solo-cowork:export -->
+#### En Cowork: subir el extracto antes de seguir (en local no aplica)
 
 **Quien exporta y quien calcula no son la misma máquina, y esto se pasa por
 alto con facilidad.** El MCP corre en el equipo del auditor y escribe ahí;
@@ -324,6 +325,17 @@ EXTRACTO="<TEMP>/gesia-cancelacion/extracto.csv"
 **Comprueba que el fichero se lee antes de seguir** —`head -2 "$EXTRACTO"`
 basta—. Es lo que separa un fallo evidente de exportar dos veces sin
 entender por qué la primera no valía, que es lo que pasó el 27/08/2026.
+<!-- /solo-cowork -->
+
+### Paso 2b — Comprobar que el extracto se lee
+
+```bash
+EXTRACTO="<TEMP>/gesia-cancelacion/extracto.csv"
+```
+
+**Comprueba que el fichero se lee antes de seguir** —`head -2 "$EXTRACTO"` basta—. Es lo
+que separa un fallo evidente de exportar dos veces sin entender por qué la primera no
+valía, que es lo que pasó el 27/08/2026.
 
 ### Paso 2c — Reconocer el extracto y preguntar (no te lo saltes)
 
@@ -342,19 +354,32 @@ No escribe ningún fichero. Dice qué columnas hay, **cuánto cancelaría cada s
 sobre este cliente**, cuántas aperturas se quedarían sin cerrar y con qué importe, qué
 cuentas se atascan, y los grupos que se quedan a un céntimo de cuadrar.
 
-**Y termina con las preguntas que hay que hacerle al auditor**, que son solo las que el
-script no puede contestar solo. Trasládaselas y **espera respuesta**: lo que se mide no se
-pregunta, y lo que se pregunta cambia el resultado.
+**Y termina con una lista numerada de PREGUNTAS AL AUDITOR.** Esa lista es la buena:
+son las que el script no puede contestar solo, y ya vienen redactadas con la cuenta y el
+importe de los que hablan.
 
-- **Si falta el número de documento**, pregunta si el diario lo trae con otro nombre. Es la
-  señal que más cancela.
-- **Si quedan aperturas sin cerrar**, pregunta por el mayor del ejercicio anterior. Matar
-  la apertura es lo que más vale del procedimiento.
-- **Si hay grupos que se quedan en céntimos**, pregunta si se pueden barrer y con qué
-  umbral. Es materialidad y la decide el auditor: por defecto se quedan pendientes, y de
-  momento el skill **no** sabe barrerlas —si dice que sí, dilo al entregar como limitación—.
-- **Pregunta siempre cómo paga o cobra el cliente.** Plazos, remesas, confirming, pagos
-  parciales.
+**Pásalas TAL CUAL: todas, con su número, sin resumirlas y sin convertir ninguna en una
+afirmación.** Y luego **espera respuesta**. Medido el 08/09/2026 en ChatGPT Cowork: el
+modelo reescribió el bloque a su manera y se dejó una pregunta entera por el camino —la del
+número de documento reutilizado entre ejercicios— y convirtió la de la apertura en un dato
+informativo, así que nadie preguntó por el mayor del ejercicio anterior. La lista del script
+crece y cambia con lo que encuentra; una lista paralela escrita aquí se queda atrasada.
+
+Lo que cambia cada respuesta, para que sepas qué hacer con ella:
+
+- **El número de documento con otro nombre** → se rehace el `SELECT` del paso 2 incluyendo
+  esa columna y se vuelve a reconocer. Es la señal que más cancela.
+- **El mayor del ejercicio anterior** → todavía no se usa: apúntalo y dilo al entregar. La
+  apertura es lo que más vale del procedimiento, así que la respuesta interesa aunque hoy
+  no se pueda aprovechar.
+- **Barrer los céntimos** → el skill **no sabe hacerlo todavía**. Si dice que sí, los grupos
+  se quedan pendientes igual y **se cuenta como limitación al entregar**, con el importe.
+- **Cómo paga o cobra el cliente** → confirma o desmiente lo que ya se ve en los tamaños de
+  grupo del reconocimiento. Si dice algo que el dato no muestra —remesas, confirming—, dilo
+  al entregar: es donde el papel se queda corto.
+- **El número reutilizado entre ejercicios** → si dice que sí, avísalo al entregar: los
+  grupos por documento siguen exigiendo suma cero, así que no se inventa nada, pero conviene
+  que lo sepa.
 
 Lo que responda **no manda sobre la aritmética**: una pista del auditor propone por dónde
 sumar, y el grupo se acepta solo si suma cero. Por eso preguntar no tiene riesgo.
@@ -379,6 +404,7 @@ vacío que hace el papel menos legible. **Léelos y cuéntalos al entregar**, no
 los escondas. La línea C05 dice si el diario trae punteo previo y cuánto: úsala
 al explicar el resultado.
 
+<!-- solo-cowork:entrega -->
 **En Cowork el script escribe en el sandbox, no en el expediente**, así que
 la ruta de destino no se cumple sola: hay que bajar el fichero. Se envía con
 `SendUserFile`, que devuelve un `file_uuid`, y con `device_commit_files` se
@@ -391,6 +417,7 @@ device_commit_files → "<expediente>/InformesGesia/CancelacionSaldos/<PAPEL>"
 En la máquina del auditor esto no hace falta: pásale directamente a
 `--salida` la ruta del expediente y el script escribe ahí, creando el árbol
 si no existe.
+<!-- /solo-cowork -->
 
 **Si el expediente está en OneDrive, el entorno puede rechazar la escritura antes
 de ejecutar nada** y pedir autorización expresa para escribir datos contables ahí.
