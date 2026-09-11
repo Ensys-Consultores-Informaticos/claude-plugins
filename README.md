@@ -125,6 +125,14 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.12.1** — los **identificadores que van dentro del texto de los apuntes** —DNI, NIE, CIF,
+IBAN y cuentas bancarias, tarjetas, matrículas, teléfonos, correos— salen **enmascarados**
+(`[DNI]`, `[CIF]`, `[IBAN]`…) en todo lo que el asistente recibe, también cuando el auditor
+autoriza que el concepto viaje. Siempre, sin nada que configurar: ningún procedimiento los
+necesita. El número de factura que llevara el texto se sigue extrayendo antes, así que no se
+pierde nada del cálculo. El resumen de cada exportación y el registro de emisión dicen cuántos
+se han enmascarado y de qué tipo. El programa que lee el expediente pasa a **1.12.2**.
+
 **1.12.0** — **confidencialidad**: lo que sale del equipo del auditor se reduce a lo que el
 procedimiento necesita, y queda anotado.
 
