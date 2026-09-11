@@ -125,6 +125,33 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
+**1.12.0** — **confidencialidad**: lo que sale del equipo del auditor se reduce a lo que el
+procedimiento necesita, y queda anotado.
+
+- **Los nombres de proveedores y clientes no salen.** En la cancelación de saldos, la
+  continuidad y el cuadro de mando, el asistente trabaja con un código por cuenta —`PROV
+  40000012`, `CLI 43000007`— en vez de la razón social, y así aparecen en el chat. El papel
+  de trabajo que se archiva en el expediente lleva los **nombres reales**: se recuperan en tu
+  equipo al terminar, y una hoja «Tokens» dice a qué cuenta corresponde cada código. La copia
+  del papel que llega por el chat está anonimizada; la buena es la del expediente.
+- **El concepto de los apuntes es decisión tuya.** Antes de exportar, el asistente te pregunta
+  si ese texto libre puede salir. Si dices no, viajan solo el número de factura y la fecha
+  que lleva escritos, que es lo que el cálculo necesita; el resultado no cambia.
+- **El DNI del equipo y los contactos del cliente no se sirven**, por ninguna vía.
+- **Registro de emisión**: cada exportación deja una línea en
+  `<expediente>\InformesGesia\RegistroEmision.jsonl` —cuándo, qué columnas, cuántas filas,
+  si viajó el concepto, a dónde—, nunca valores. Es la evidencia del control para el manual de
+  calidad; no lo borres.
+- La cancelación de saldos, además: elige sola entre varias columnas de número de factura
+  midiendo cuál cierra más grupos, dice en el papel el paso que formó cada grupo (documento,
+  apertura, importe, acumulación…), separa los pagos anteriores a una factura **sin** fecha de
+  documento de los que sí la tienen, y hace las preguntas al auditor como preguntas.
+
+El programa que lee el expediente pasa a **1.12.1**: nuevas herramientas `columnas` (qué
+columnas tiene una tabla, sin traer filas) y `rehidratar` (devuelve los nombres al papel),
+`configurar` admite `perfil`, `concepto`, `nombres` y `gs3_anterior`, y la ayuda de SQL dice lo
+que Access no sabe hacer. **Actualiza en frío**: cierra Claude, actualiza, vuelve a abrir.
+
 **1.11.0** — la **cancelación de saldos** empareja mucho mejor, y pregunta antes de
 empezar.
 
