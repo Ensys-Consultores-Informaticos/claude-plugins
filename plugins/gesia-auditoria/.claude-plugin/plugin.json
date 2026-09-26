@@ -1,0 +1,18 @@
+{
+  "name": "gesia-auditoria",
+  "displayName": "Gesia — Expediente de auditoría",
+  "version": "1.16.1",
+  "description": "Procedimientos de auditoría sobre el expediente de Gesia: cuadro de mando del diario, revisión del contenido de la memoria, continuidad de saldos de apertura, cancelación de saldos (facturas contra pagos), identificación de riesgos, investigación de la entidad en fuentes públicas, y las pruebas de muestreo de ForSampling: validación de la muestra de una prueba de cumplimiento y de una MUM contra las facturas escaneadas, que lee el propio modelo o, con subagentes, un agente lector por lotes en paralelo. La cancelación de saldos empareja además por número de documento, cierra la apertura con los pagos de facturas del ejercicio anterior y reconoce el extracto antes de procesar para preguntar al auditor lo que hace falta. Los nombres de proveedores y clientes viajan anonimizados —el asistente ve un código por cuenta, no la razón social— y el papel de trabajo los recupera en el equipo del auditor: en la cancelación de saldos, la continuidad de saldos, el cuadro de mando del diario y también, desde esta versión, en las dos pruebas de muestreo de ForSampling, donde además las facturas escaneadas se tachan en el equipo del auditor antes de subirlas —los PDF no salen de su disco— dejando legibles importes, fechas y número de documento; el tachado cubre además cualquier razón social del plan de cuentas del expediente que el documento nombre, no solo la del emisor —lo que no cubre, y se dice, es el tercero que no está en ese plan de cuentas, como un banco o un transportista, y el nombre que el reconocimiento de texto parte en dos renglones—; y el documento cuyo emisor no se reconoce sube con el nombre a la vista y el asistente lo advierte antes; el texto libre de los apuntes solo sale si el auditor lo autoriza; el DNI del equipo y los contactos del cliente no se sirven; y cada exportación queda anotada en el expediente. Revisa además los estados financieros del expediente: balance y cuenta de resultados comparados con la conciliación de lo presentado por el cliente a lo auditado, el movimiento del patrimonio neto de la apertura al cierre, y el estado de flujos de efectivo del módulo EFE con sus ajustes, incluida una propuesta de importes para las plantillas de ajuste cuyo criterio se ha podido contrastar, que sale marcada como borrador cuando no hay ningún ajuste aprobado del que partir. Incluye el servidor MCP de Gesia, que lee también el cliente de muestreo (.cli), y un registro de ejecución anónimo para reportar incidencias. Requiere Windows. (MCP 1.22.2) (v1.16.1)",
+  "author": {
+    "name": "Ensys Consultores Informáticos, S.L."
+  },
+  "license": "Propietario",
+  "keywords": [
+    "gesia",
+    "auditoria",
+    "contabilidad",
+    "ensys",
+    "diario"
+  ],
+  "homepage": "https://github.com/Ensys-Consultores-Informaticos/claude-plugins"
+}
