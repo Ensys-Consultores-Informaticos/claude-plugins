@@ -127,7 +127,7 @@ que se hayan contado los avisos que hayan salido durante su preparación.
 
 ## Versión publicada
 
-**1.16.2**, con el programa que lee el expediente en la **1.22.2**.
+**1.16.2**, con el programa que lee el expediente en la **1.23.0**.
 
 Lo que conviene saber para usarlo con criterio, porque es lo que no se puede deducir mirando
 el resultado:
